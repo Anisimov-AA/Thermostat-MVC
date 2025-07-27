@@ -1,11 +1,17 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+import view.utils.StyleConfig;
 
 public class ThermostatView extends JFrame implements IThermostatView {
   // Window configuration
@@ -14,11 +20,19 @@ public class ThermostatView extends JFrame implements IThermostatView {
   private static final int WINDOW_HEIGHT = 300;
   private static final int PADDING = 10;
 
+  // Temperature unit
+  private static final String DEGREE_SYMBOL = "°C";
+
+  // Display components
+  private JLabel currentTempLabel;
+  private JLabel targetTempLabel;
+
   /**
    * Constructs a new ThermostatView
    */
   public ThermostatView() {
     setupFrame();
+    createComponents();
     layoutComponents();
   }
 
@@ -39,6 +53,27 @@ public class ThermostatView extends JFrame implements IThermostatView {
       // fall back to default if system L&F fails
     }
   }
+
+
+  private void createComponents() {
+    // display components
+    this.currentTempLabel = createDisplayLabel("--.-", StyleConfig.Fonts.TEMP_CURRENT_FONT);
+    this.targetTempLabel = createDisplayLabel("--.-", StyleConfig.Fonts.TEMP_TARGET_FONT);
+  }
+
+  /**
+   * Creates a label to display something
+   * @param text the initial text
+   * @param font the font to use
+   * @return configured JLabel
+   */
+  private JLabel createDisplayLabel(String text, Font font) {
+    JLabel label = new JLabel(text);
+    label.setFont(font);
+
+    return label;
+  }
+
 
   /**
    * Arranges all UI components in the main frame
@@ -66,8 +101,30 @@ public class ThermostatView extends JFrame implements IThermostatView {
    * @return JPanel configured for temperature display
    */
   private JPanel createDisplayPanel() {
-    JPanel panel = new JPanel();
+    JPanel panel = new JPanel(new GridBagLayout());
     panel.setBorder(new TitledBorder("Temperature Display"));
+
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(5, 5, 5, 5);
+
+    gbc.gridx = 0; gbc.gridy = 0;
+    panel.add(new JLabel("Current:"), gbc);
+
+    gbc.gridx = 1;
+    panel.add(currentTempLabel, gbc);
+
+    gbc.gridx = 2;
+    panel.add(new JLabel(DEGREE_SYMBOL), gbc);
+
+    gbc.gridx = 0; gbc.gridy = 1;
+    panel.add(new JLabel("Target:"), gbc);
+
+    gbc.gridx = 1;
+    panel.add(targetTempLabel, gbc);
+
+    gbc.gridx = 2;
+    panel.add(new JLabel(DEGREE_SYMBOL), gbc);
+
 
     return panel;
   }
@@ -94,6 +151,7 @@ public class ThermostatView extends JFrame implements IThermostatView {
 
     return panel;
   }
+
 
   @Override
   public void addListener(ActionListener listener) {
