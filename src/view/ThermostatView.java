@@ -1,17 +1,22 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import view.utils.StyleConfig;
+import view.utils.StyleConfig.Fonts;
 
 public class ThermostatView extends JFrame implements IThermostatView {
   // Window configuration
@@ -26,6 +31,8 @@ public class ThermostatView extends JFrame implements IThermostatView {
   // Display components
   private JLabel currentTempLabel;
   private JLabel targetTempLabel;
+  private JLabel heatingIndicator;
+  private JLabel coolingIndicator;
 
   /**
    * Constructs a new ThermostatView
@@ -59,6 +66,9 @@ public class ThermostatView extends JFrame implements IThermostatView {
     // display components
     this.currentTempLabel = createDisplayLabel("--.-", StyleConfig.Fonts.TEMP_CURRENT_FONT);
     this.targetTempLabel = createDisplayLabel("--.-", StyleConfig.Fonts.TEMP_TARGET_FONT);
+    this.heatingIndicator = createStatusLabel("HEAT", Fonts.INDICATOR_FONT, StyleConfig.Colors.INDICATOR_INACTIVE_COLOR, StyleConfig.Colors.INDICATOR_INACTIVE_TEXT);
+    this.coolingIndicator = createStatusLabel("COOL", Fonts.INDICATOR_FONT, StyleConfig.Colors.INDICATOR_INACTIVE_COLOR, StyleConfig.Colors.INDICATOR_INACTIVE_TEXT);
+
   }
 
   /**
@@ -74,6 +84,27 @@ public class ThermostatView extends JFrame implements IThermostatView {
     return label;
   }
 
+  /**
+   * Creates a status label with specified text and color
+   * @param text the indicator text (e.g., "HEAT", "COOL")
+   * @param font the font to use
+   * @param bgColor the background color
+   * @param textColor the foreground color
+   * @return configured JLabel
+   */
+  private JLabel createStatusLabel(String text, Font font, Color bgColor, Color textColor) {
+    JLabel label = new JLabel(text);
+    label.setOpaque(true);
+    label.setBackground(bgColor);
+    label.setForeground(textColor);
+    label.setFont(font);
+    label.setBorder(BorderFactory.createCompoundBorder(
+        BorderFactory.createLineBorder(Color.GRAY),
+        new EmptyBorder(2, 5, 2, 5)
+    ));
+
+    return label;
+  }
 
   /**
    * Arranges all UI components in the main frame
@@ -107,6 +138,7 @@ public class ThermostatView extends JFrame implements IThermostatView {
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.insets = new Insets(5, 5, 5, 5);
 
+    // current temperature row
     gbc.gridx = 0; gbc.gridy = 0;
     panel.add(new JLabel("Current:"), gbc);
 
@@ -116,6 +148,7 @@ public class ThermostatView extends JFrame implements IThermostatView {
     gbc.gridx = 2;
     panel.add(new JLabel(DEGREE_SYMBOL), gbc);
 
+    // target temperature row
     gbc.gridx = 0; gbc.gridy = 1;
     panel.add(new JLabel("Target:"), gbc);
 
@@ -125,7 +158,19 @@ public class ThermostatView extends JFrame implements IThermostatView {
     gbc.gridx = 2;
     panel.add(new JLabel(DEGREE_SYMBOL), gbc);
 
+    // status indicators
+    gbc.gridx = 3; gbc.gridy = 0;
+    gbc.gridheight = 2; // span both rows
+    gbc.insets = new Insets(5, 20, 5, 5);  // extra left padding
+    panel.add(createStatusIndicatorPanel(), gbc);
 
+    return panel;
+  }
+
+  private JPanel createStatusIndicatorPanel() {
+    JPanel panel = new JPanel(new FlowLayout());
+    panel.add(heatingIndicator);
+    panel.add(coolingIndicator);
     return panel;
   }
 
