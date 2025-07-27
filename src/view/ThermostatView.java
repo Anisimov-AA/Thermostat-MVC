@@ -18,6 +18,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import view.utils.StyleConfig;
+import view.utils.StyleConfig.Colors;
 import view.utils.StyleConfig.Fonts;
 
 public class ThermostatView extends JFrame implements IThermostatView {
@@ -40,6 +41,9 @@ public class ThermostatView extends JFrame implements IThermostatView {
   private JLabel statusLabel;
   private JTextField tempInputField; // input components
   private JButton setTempButton;
+
+  // Feedback components
+  private JLabel messageLabel;
 
   /**
    * Constructs a new ThermostatView
@@ -68,6 +72,7 @@ public class ThermostatView extends JFrame implements IThermostatView {
     }
   }
 
+
   /**
    * Creates and initializes all UI components
    * Called once during construction
@@ -84,6 +89,8 @@ public class ThermostatView extends JFrame implements IThermostatView {
     this.tempInputField = createTextField(5, Fonts.INPUT_FONT, "Enter temperature in Celsius");
     this.setTempButton = createButton("Set Temperature", Fonts.BUTTON_FONT,"Click to set the target temperature");
 
+    // feedback components
+    this.messageLabel = createMessageLabel(Fonts.MESSAGE_FONT, Colors.MESSAGE_INFO_COLOR);
   }
 
   /**
@@ -151,14 +158,28 @@ public class ThermostatView extends JFrame implements IThermostatView {
     return button;
   }
 
+  /**
+   * Creates a styled message label
+   * @param font the font to use
+   * @param textColor
+   * @return a configured JLabel for messages
+   */
+  private JLabel createMessageLabel(Font font, Color textColor) {
+    JLabel label = new JLabel(" "); // space to maintain consistent height
+    label.setFont(font);
+    label.setForeground(textColor);
+
+    return label;
+  }
+
 
   /**
    * Arranges all UI components in the main frame
    * Uses BorderLayout with three main sections: display, control, and messages
    */
   private void layoutComponents() {
-    JPanel mainPanel = new JPanel();
-    mainPanel.setLayout(new BorderLayout());
+    JPanel mainPanel = new JPanel(new BorderLayout(PADDING, PADDING));
+    mainPanel.setBorder(new EmptyBorder(PADDING, PADDING, PADDING, PADDING));
 
     // top panel - temperature display
     mainPanel.add(createDisplayPanel(), BorderLayout.NORTH);
@@ -263,7 +284,8 @@ public class ThermostatView extends JFrame implements IThermostatView {
    * @return JPanel configured for message display
    */
   private JPanel createMessagePanel() {
-    JPanel panel = new JPanel();
+    JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    panel.add(messageLabel);
 
     return panel;
   }

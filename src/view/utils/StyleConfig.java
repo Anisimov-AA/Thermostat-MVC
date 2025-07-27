@@ -17,6 +17,8 @@ public class StyleConfig {
     public static final Font INPUT_FONT = new Font(FAMILY, Font.PLAIN, 14);
     public static final Font BUTTON_FONT = new Font(FAMILY, Font.PLAIN, 12);
 
+    public static final Font MESSAGE_FONT = new Font(FAMILY, Font.ITALIC, 12);
+
     private Fonts() {} // prevent instantiation
   }
 
@@ -28,6 +30,9 @@ public class StyleConfig {
     public static final Color INDICATOR_ACTIVE_COLOR_HEATING = Color.RED;
     public static final Color INDICATOR_ACTIVE_COLOR_COOLING = Color.BLUE;
     public static final Color INDICATOR_ACTIVE_TEXT = Color.WHITE;
+
+    public static final Color MESSAGE_INFO_COLOR = Color.BLUE;
+    public static final Color MESSAGE_ERROR_COLOR = Color.RED;
 
     private Colors() {}
   }
