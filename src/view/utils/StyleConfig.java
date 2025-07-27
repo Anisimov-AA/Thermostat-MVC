@@ -13,6 +13,10 @@ public class StyleConfig {
     public static final Font TEMP_TARGET_FONT = new Font(FAMILY, Font.PLAIN, 20);
     public static final Font INDICATOR_FONT = new Font(FAMILY, Font.PLAIN, 10);
 
+    public static final Font STATUS_FONT = new Font(FAMILY, Font.PLAIN, 16);
+    public static final Font INPUT_FONT = new Font(FAMILY, Font.PLAIN, 14);
+    public static final Font BUTTON_FONT = new Font(FAMILY, Font.PLAIN, 12);
+
     private Fonts() {} // prevent instantiation
   }
 

@@ -9,9 +9,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -33,6 +35,11 @@ public class ThermostatView extends JFrame implements IThermostatView {
   private JLabel targetTempLabel;
   private JLabel heatingIndicator;
   private JLabel coolingIndicator;
+
+  // Controll components
+  private JLabel statusLabel;
+  private JTextField tempInputField; // input components
+  private JButton setTempButton;
 
   /**
    * Constructs a new ThermostatView
@@ -61,13 +68,21 @@ public class ThermostatView extends JFrame implements IThermostatView {
     }
   }
 
-
+  /**
+   * Creates and initializes all UI components
+   * Called once during construction
+   */
   private void createComponents() {
     // display components
     this.currentTempLabel = createDisplayLabel("--.-", StyleConfig.Fonts.TEMP_CURRENT_FONT);
     this.targetTempLabel = createDisplayLabel("--.-", StyleConfig.Fonts.TEMP_TARGET_FONT);
     this.heatingIndicator = createStatusLabel("HEAT", Fonts.INDICATOR_FONT, StyleConfig.Colors.INDICATOR_INACTIVE_COLOR, StyleConfig.Colors.INDICATOR_INACTIVE_TEXT);
     this.coolingIndicator = createStatusLabel("COOL", Fonts.INDICATOR_FONT, StyleConfig.Colors.INDICATOR_INACTIVE_COLOR, StyleConfig.Colors.INDICATOR_INACTIVE_TEXT);
+
+    // control components
+    this.statusLabel = createDisplayLabel("Idle", Fonts.STATUS_FONT);
+    this.tempInputField = createTextField(5, Fonts.INPUT_FONT, "Enter temperature in Celsius");
+    this.setTempButton = createButton("Set Temperature", Fonts.BUTTON_FONT,"Click to set the target temperature");
 
   }
 
@@ -105,6 +120,37 @@ public class ThermostatView extends JFrame implements IThermostatView {
 
     return label;
   }
+
+  /**
+   * Creates a styled text field
+   * @param columns the number of columns for the text field
+   * @param font the font to use
+   * @param tip the tip text
+   * @return a configured JTextField
+   */
+  private JTextField createTextField(int columns, Font font, String tip) {
+    JTextField field = new JTextField(columns);
+    field.setFont(font);
+    field.setToolTipText(tip);
+
+    return field;
+  }
+
+  /**
+   * Creates a styled button
+   * @param text the button text
+   * @param font the font to use
+   * @param tip the tip text
+   * @return a configured JButton
+   */
+  private JButton createButton(String text, Font font, String tip) {
+    JButton button = new JButton(text);
+    button.setFont(font);
+    button.setToolTipText(tip);
+
+    return button;
+  }
+
 
   /**
    * Arranges all UI components in the main frame
@@ -167,6 +213,10 @@ public class ThermostatView extends JFrame implements IThermostatView {
     return panel;
   }
 
+  /**
+   * Creates the panel containing heating and cooling indicators.
+   * @return JPanel with both status indicators
+   */
   private JPanel createStatusIndicatorPanel() {
     JPanel panel = new JPanel(new FlowLayout());
     panel.add(heatingIndicator);
@@ -180,8 +230,29 @@ public class ThermostatView extends JFrame implements IThermostatView {
    * @return JPanel configured for temperature control
    */
   private JPanel createControlPanel() {
-    JPanel panel = new JPanel();
+    JPanel panel = new JPanel(new GridBagLayout());
     panel.setBorder(new TitledBorder("Temperature Control"));
+
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(5, 5, 5, 5);
+
+    // status label
+    gbc.gridx = 0; gbc.gridy = 0;
+    gbc.gridwidth = 3;
+    panel.add(statusLabel, gbc);
+
+    // input controls row
+    gbc.gridy = 1;
+    gbc.gridwidth = 1;
+    panel.add(new JLabel("Set Temperature:"), gbc);
+
+    gbc.gridx = 1;
+    gbc.fill = GridBagConstraints.HORIZONTAL;
+    panel.add(tempInputField, gbc);
+
+    gbc.gridx = 2;
+    gbc.fill = GridBagConstraints.NONE;
+    panel.add(setTempButton, gbc);
 
     return panel;
   }
