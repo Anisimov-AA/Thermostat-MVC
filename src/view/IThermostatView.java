@@ -27,6 +27,7 @@ public interface IThermostatView {
   void clearInput();
 
   // For user feedback
+
   /**
    * Displays a feedback message to the user
    * The message should be displayed in a non-intrusive way and may automatically disappear after a short duration
