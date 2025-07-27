@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -44,6 +45,10 @@ public class ThermostatView extends JFrame implements IThermostatView {
 
   // Feedback components
   private JLabel messageLabel;
+
+  // Message display duration
+  private static final int MESSAGE_TIMEOUT_MS = 3000;
+  private Timer messageTimer; // Store timer reference to cancel if needed
 
   /**
    * Constructs a new ThermostatView
@@ -293,32 +298,97 @@ public class ThermostatView extends JFrame implements IThermostatView {
 
   @Override
   public void addListener(ActionListener listener) {
-
+    setTempButton.addActionListener(listener);
   }
 
   @Override
   public String getInput() {
-    return "";
+    return this.tempInputField.getText().trim();
   }
 
   @Override
   public void clearInput() {
-
-  }
-
-  @Override
-  public void showMessage(String message, boolean isError) {
-
+    this.tempInputField.setText("");
+    this.tempInputField.requestFocus();
   }
 
   @Override
   public void updateDisplay(double currentTemp, double targetTemp, boolean isHeating,
       boolean isCooling) {
 
+    updateTemperature(currentTemp, targetTemp);
+
+    updateStatus(isHeating, isCooling);
+
+    updateIndicator(heatingIndicator, isHeating, Colors.INDICATOR_ACTIVE_COLOR_HEATING);
+    updateIndicator(coolingIndicator, isCooling, Colors.INDICATOR_ACTIVE_COLOR_COOLING);
+  }
+
+  /**
+   * Update temperature displays
+   * @param currentTemp the current temperature reading in degrees Celsius
+   * @param targetTemp the target temperature setting in degrees Celsius
+   */
+  private void updateTemperature(double currentTemp, double targetTemp) {
+    this.currentTempLabel.setText(String.format("%.1f", currentTemp));
+    this.targetTempLabel.setText(String.format("%.1f", targetTemp));
+  }
+
+  /**
+   * // Update status text
+   * @param isHeating true if the heating system is currently active, false otherwise
+   * @param isCooling true if the cooling system is currently active, false otherwise
+   */
+  private void updateStatus(boolean isHeating, boolean isCooling) {
+    String status;
+    if(isHeating) {
+      status = "Heating";
+    } else if (isCooling) {
+      status = "Cooling";
+    } else {
+      status = "Idle";
+    }
+    statusLabel.setText("Status: " + status);
+  }
+
+  /**
+   * Update indicators
+   * @param indicator the indicator to update
+   * @param active true if indicator should show active state
+   * @param activeColor the color to use when active
+   */
+  private void updateIndicator(JLabel indicator, boolean active, Color activeColor) {
+    if(active) {
+      indicator.setBackground(activeColor);
+      indicator.setForeground(Colors.INDICATOR_ACTIVE_TEXT);
+    } else {
+      indicator.setBackground(Colors.INDICATOR_INACTIVE_COLOR);
+      indicator.setForeground(Colors.INDICATOR_INACTIVE_TEXT);
+    }
+  }
+
+  @Override
+  public void showMessage(String message, boolean isError) {
+    // cancel any existing timer
+    if (messageTimer != null && messageTimer.isRunning()) {
+      messageTimer.stop();
+    }
+
+    messageLabel.setText(message);
+    messageLabel.setForeground(isError ? Colors.MESSAGE_ERROR_COLOR : Colors.MESSAGE_INFO_COLOR);
+
+    // clear message after 3 seconds
+    messageTimer = new Timer(MESSAGE_TIMEOUT_MS, e -> messageLabel.setText(" "));
+    messageTimer.setRepeats(false);
+    messageTimer.start();
   }
 
   public static void main(String[] args) {
     ThermostatView view = new ThermostatView();
     view.setVisible(true);
+
+    // Demo data for testing
+    view.updateDisplay(21.9, 21, false, true);
+    view.showMessage("View initialized successfully", false);
   }
 }
