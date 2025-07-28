@@ -61,12 +61,12 @@ public class MockThermostatModel implements IThermostatModel {
 
   // TEST HELPER METHODS
   // Let test check if method was called
-  boolean wasTheSetTargetTemperatureMethodCalled() {
+  boolean wasSetTargetTemperatureCalled() {
     return setTargetTemperatureCalled;
   }
 
   // Let test check what value was passed
-  double whatValueWasPassedToSetTargetTemperature() {
+  double getLastSetTargetTemperature() {
     return lastSetTargetTemperature;
   }
 
