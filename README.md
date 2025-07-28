@@ -12,6 +12,20 @@ This project implements a smart thermostat control system that allows users to s
 - Input validation and error handling
 - Internationalization support (comma/period decimal separators)
 
+### Thermostat States
+
+#### Idle
+![Idle](img/idle.jpg)
+
+#### Heating
+![Heating](img/heating.jpg)
+
+#### Cooling
+![Cooling](img/cooling.jpg)
+
+#### Error
+![Error](img/error.jpg)
+
 ## 🏗️ Architecture
 
 The application follows the MVC pattern with clear separation of concerns:  
