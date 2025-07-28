@@ -14,17 +14,13 @@ This project implements a smart thermostat control system that allows users to s
 
 ### Thermostat States
 
-#### Idle
-![Idle](img/idle.jpg)
-
-#### Heating
-![Heating](img/heating.jpg)
-
-#### Cooling
-![Cooling](img/cooling.jpg)
-
-#### Error
-![Error](img/error.jpg)
+<p align="center">
+  <img src="img/idle.jpg" alt="Idle" width="200" />
+  <img src="img/heating.jpg" alt="Heating" width="200" />
+  <br/>
+  <img src="img/cooling.jpg" alt="Cooling" width="200" />
+  <img src="img/error.jpg" alt="Error" width="200" />
+</p>
 
 ## 🏗️ Architecture
 
