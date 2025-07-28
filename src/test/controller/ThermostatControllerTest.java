@@ -55,7 +55,44 @@ public class ThermostatControllerTest {
     assertEquals("Target set to 25.0°C", mockView.getLastShownMessage());
     assertFalse(mockView.wasLastMessageAnError());
 
-    // 3. Check input was cleared
+    // 3. check input was cleared
     assertTrue(mockView.wasClearInputCalled());
+  }
+
+  @Test
+  void testInvalidNumberInput() {
+    // set up the test scenario
+    mockView.setUserInput("abc");
+    mockView.simulateButtonClick();
+
+    // check what happened
+    // 1. model should NOT be called
+    assertFalse(mockModel.wasSetTargetTemperatureCalled());
+
+    // 2. error message should be shown
+    assertEquals("Please enter a valid number", mockView.getLastShownMessage());
+    assertTrue(mockView.wasLastMessageAnError());
+
+    // 3. input should NOT be cleared (let user fix it)
+    assertFalse(mockView.wasClearInputCalled());
+  }
+
+  @Test
+  void testOutOfBoundsTemperature() {
+    // set up the test scenario
+    mockView.setUserInput("50.0");
+    mockModel.configureToThrowException("Temperature must be between 10.0°C and 35.0°C"); // configure model to throw exception
+    mockView.simulateButtonClick();
+
+    // check what happened
+    // 1. model WAS called (we need to try before we know it's invalid)
+    assertTrue(mockModel.wasSetTargetTemperatureCalled());
+
+    // 2. model's error message should be shown to user
+    assertEquals("Temperature must be between 10.0°C and 35.0°C", mockView.getLastShownMessage());
+    assertTrue(mockView.wasLastMessageAnError());
+
+    // 3. input should NOT be cleared
+    assertFalse(mockView.wasClearInputCalled());
   }
 }
