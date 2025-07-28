@@ -50,7 +50,7 @@ test/
 - **Swing** - GUI framework
 - **JUnit 5** - Testing framework
 
-💡 Usage
+## 💡 Usage
 
 Launch the application - The thermostat window will appear
 View current temperature - Displayed in the top panel
@@ -74,7 +74,7 @@ abc → "Please enter a valid number"
 50 → "Temperature must be between 10.0°C and 35.0°C"
 20.55 → "Temperature must be in 0.1°C increments"
 
-🔮 Future Enhancements
+## 🔮 Future Enhancements
 
 Features:
 - Add temperature history graph
