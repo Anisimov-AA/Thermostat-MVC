@@ -15,22 +15,22 @@ This project implements a smart thermostat control system that allows users to s
 ## 🏗️ Architecture
 
 The application follows the MVC pattern with clear separation of concerns:
-src/
-├── model/
-│   ├── IThermostatModel.java      # Model interface
-│   └── ThermostatModel.java       # Business logic implementation
-├── view/
-│   ├── IThermostatView.java       # View interface
-│   └── SwingThermostatView.java   # Swing GUI implementation
-├── controller/
-│   ├── IThermostatController.java # Controller interface
-│   └── ThermostatController.java  # Controller implementation
-└── ThermostatApp.java             # Application entry point
-test/
-├── model/
-│   └── ThermostatModelTest.java   # Model unit tests
-└── controller/
-└── ThermostatControllerTest.java # Controller tests with mocks
+src/  
+├── model/  
+│   ├── IThermostatModel.java      # Model interface  
+│   └── ThermostatModel.java       # Business logic implementation  
+├── view/  
+│   ├── IThermostatView.java       # View interface  
+│   └── SwingThermostatView.java   # Swing GUI implementation  
+├── controller/  
+│   ├── IThermostatController.java # Controller interface  
+│   └── ThermostatController.java  # Controller implementation  
+└── ThermostatApp.java             # Application entry point  
+test/  
+├── model/  
+│   └── ThermostatModelTest.java   # Model unit tests  
+└── controller/  
+└── ThermostatControllerTest.java # Controller tests with mocks  
 
 ## 🚀 Features
 
