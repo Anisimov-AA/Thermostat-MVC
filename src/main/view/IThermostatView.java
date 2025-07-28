@@ -49,4 +49,6 @@ public interface IThermostatView {
    */
   void updateDisplay(double currentTemp, double targetTemp,
       boolean isHeating, boolean isCooling);
+
+  void setVisible(boolean visible);
 }

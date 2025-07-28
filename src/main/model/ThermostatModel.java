@@ -35,12 +35,22 @@ public class ThermostatModel implements IThermostatModel {
 
   @Override
   public void setTargetTemperature(double temperature) {
+    // first check bounds
     if(temperature < MIN_TEMPERATURE || temperature > MAX_TEMPERATURE) {
       throw new IllegalArgumentException(
-          String.format("Temperature must be between %.1f°C and %.1f°C. Provided: %.1f°C",
+          String.format("Temperature range: %.1f°C – %.1f°C. Provided: %.1f°C",
               MIN_TEMPERATURE, MAX_TEMPERATURE, temperature)
       );
     }
+
+    // check if it's in 0.1 increments
+    double scaled = temperature * 10;
+    if(scaled != Math.floor(scaled)) {
+      throw new IllegalArgumentException(
+          "Temperature must be in 0.1°C increments (e.g., 20.0, 20.1, 20.2)"
+      );
+    }
+
     this.targetTemperature = temperature;
   }
 

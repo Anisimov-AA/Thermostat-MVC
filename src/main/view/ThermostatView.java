@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -330,8 +331,8 @@ public class ThermostatView extends JFrame implements IThermostatView {
    * @param targetTemp the target temperature setting in degrees Celsius
    */
   private void updateTemperature(double currentTemp, double targetTemp) {
-    this.currentTempLabel.setText(String.format("%.1f", currentTemp));
-    this.targetTempLabel.setText(String.format("%.1f", targetTemp));
+    this.currentTempLabel.setText(String.format(Locale.US, "%.1f", currentTemp));
+    this.targetTempLabel.setText(String.format(Locale.US, "%.1f", targetTemp));
   }
 
   /**
