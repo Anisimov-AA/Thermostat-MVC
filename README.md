@@ -12,15 +12,22 @@ This project implements a smart thermostat control system that allows users to s
 - Input validation and error handling
 - Internationalization support (comma/period decimal separators)
 
-### Thermostat States
+<p align="center">
+  <img src="img/idle.jpg" alt="Idle" width="300" style="margin: 10px;" /><br/>
+  <strong>Idle</strong>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="img/heating.jpg" alt="Heating" width="300" style="margin: 10px;" /><br/>
+  <strong>Heating</strong>
+</p>
 
 <p align="center">
-  <img src="img/idle.jpg" alt="Idle" width="200" />
-  <img src="img/heating.jpg" alt="Heating" width="200" />
-  <br/>
-  <img src="img/cooling.jpg" alt="Cooling" width="200" />
-  <img src="img/error.jpg" alt="Error" width="200" />
+  <img src="img/cooling.jpg" alt="Cooling" width="300" style="margin: 10px;" /><br/>
+  <strong>Cooling</strong>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="img/error.jpg" alt="Error" width="300" style="margin: 10px;" /><br/>
+  <strong>Error</strong>
 </p>
+
 
 ## 🏗️ Architecture
 
