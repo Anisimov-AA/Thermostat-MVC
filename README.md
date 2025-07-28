@@ -12,22 +12,28 @@ This project implements a smart thermostat control system that allows users to s
 - Input validation and error handling
 - Internationalization support (comma/period decimal separators)
 
-<p align="center">
-  <img src="img/idle.jpg" alt="Idle" width="300" style="margin: 10px;" /><br/>
-  <strong>Idle</strong>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="img/heating.jpg" alt="Heating" width="300" style="margin: 10px;" /><br/>
-  <strong>Heating</strong>
-</p>
-
-<p align="center">
-  <img src="img/cooling.jpg" alt="Cooling" width="300" style="margin: 10px;" /><br/>
-  <strong>Cooling</strong>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="img/error.jpg" alt="Error" width="300" style="margin: 10px;" /><br/>
-  <strong>Error</strong>
-</p>
-
+<table align="center">
+  <tr>
+    <td align="center" style="padding: 10px;">
+      <img src="img/idle.jpg" width="350"/><br/>
+      <strong>Idle</strong>
+    </td>
+    <td align="center" style="padding: 10px;">
+      <img src="img/heating.jpg" width="350"/><br/>
+      <strong>Heating</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" style="padding: 10px;">
+      <img src="img/cooling.jpg" width="350"/><br/>
+      <strong>Cooling</strong>
+    </td>
+    <td align="center" style="padding: 10px;">
+      <img src="img/error.jpg" width="350"/><br/>
+      <strong>Error</strong>
+    </td>
+  </tr>
+</table>
 
 ## 🏗️ Architecture
 
