@@ -127,11 +127,11 @@ public class ThermostatController implements IThermostatController, ActionListen
     }
   }
 
-  public static void main(String[] args) {
-      IThermostatModel model = new ThermostatModel();
-      IThermostatView view = new ThermostatView();
-      IThermostatController controller = new ThermostatController(model, view);
-
-      controller.run();
-    }
+//  public static void main(String[] args) {
+//      IThermostatModel model = new ThermostatModel();
+//      IThermostatView view = new ThermostatView();
+//      IThermostatController controller = new ThermostatController(model, view);
+//
+//      controller.run();
+//    }
 }

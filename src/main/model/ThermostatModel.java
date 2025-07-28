@@ -111,12 +111,12 @@ public class ThermostatModel implements IThermostatModel {
         "coolingOn: " + coolingOn + "\n";
   }
 
-  public static void main(String[] args) {
-    ThermostatModel model = new ThermostatModel();
-    System.out.println(model);
-
-    model.setTargetTemperature(21);
-    model.updateSystem();
-    System.out.println(model);
-  }
+//  public static void main(String[] args) {
+//    ThermostatModel model = new ThermostatModel();
+//    System.out.println(model);
+//
+//    model.setTargetTemperature(21);
+//    model.updateSystem();
+//    System.out.println(model);
+//  }
 }

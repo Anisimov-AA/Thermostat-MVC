@@ -384,12 +384,12 @@ public class ThermostatView extends JFrame implements IThermostatView {
     messageTimer.start();
   }
 
-  public static void main(String[] args) {
-    ThermostatView view = new ThermostatView();
-    view.setVisible(true);
-
-    // Demo data for testing
-    view.updateDisplay(21.9, 21, false, true);
-    view.showMessage("View initialized successfully", false);
-  }
+//  public static void main(String[] args) {
+//    ThermostatView view = new ThermostatView();
+//    view.setVisible(true);
+//
+//    // Demo data for testing
+//    view.updateDisplay(21.9, 21, false, true);
+//    view.showMessage("View initialized successfully", false);
+//  }
 }
