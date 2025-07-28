@@ -1,4 +1,4 @@
-package model;
+package main.model;
 
 /**
  * Interface defining the contract for a thermostat model in the MVC pattern

@@ -1,4 +1,4 @@
-package model;
+package main.model;
 
 /**
  * Implementation of the thermostat model following MVC pattern
@@ -41,7 +41,7 @@ public class ThermostatModel implements IThermostatModel {
               MIN_TEMPERATURE, MAX_TEMPERATURE, temperature)
       );
     }
-    this.currentTemperature = temperature;
+    this.targetTemperature = temperature;
   }
 
   @Override
@@ -91,5 +91,22 @@ public class ThermostatModel implements IThermostatModel {
   @Override
   public double getMaxTemperature() {
     return MAX_TEMPERATURE;
+  }
+
+  @Override
+  public String toString() {
+    return "curr temp: " + currentTemperature + "\n" +
+        "target temp: " + targetTemperature + "\n" +
+        "heatingOn: " + heatingOn + "\n" +
+        "coolingOn: " + coolingOn + "\n";
+  }
+
+  public static void main(String[] args) {
+    ThermostatModel model = new ThermostatModel();
+    System.out.println(model);
+
+    model.setTargetTemperature(21);
+    model.updateSystem();
+    System.out.println(model);
   }
 }

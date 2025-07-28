@@ -1,4 +1,4 @@
-package view;
+package main.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,9 +18,9 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import view.utils.StyleConfig;
-import view.utils.StyleConfig.Colors;
-import view.utils.StyleConfig.Fonts;
+import main.view.utils.StyleConfig;
+import main.view.utils.StyleConfig.Colors;
+import main.view.utils.StyleConfig.Fonts;
 
 public class ThermostatView extends JFrame implements IThermostatView {
   // Window configuration
