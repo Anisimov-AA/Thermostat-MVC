@@ -15,7 +15,7 @@ This project implements a smart thermostat control system that allows users to s
 ## 🏗️ Architecture
 
 The application follows the MVC pattern with clear separation of concerns:  
-`src/  
+src/  
 ├── model/  
 │   ├── IThermostatModel.java      # Model interface  
 │   └── ThermostatModel.java       # Business logic implementation  
@@ -30,7 +30,7 @@ test/
 ├── model/  
 │   └── ThermostatModelTest.java   # Model unit tests  
 └── controller/  
-└── ThermostatControllerTest.java # Controller tests with mocks`
+└── ThermostatControllerTest.java # Controller tests with mocks
 
 ## 🚀 Features
 
@@ -52,28 +52,28 @@ test/
 
 ## 💡 Usage
 
-Launch the application - The thermostat window will appear
-View current temperature - Displayed in the top panel
-Set target temperature:
-
-Enter desired temperature (10°C - 35°C)
-Click "Set Temperature"
-System will automatically heat or cool to reach target
-
-Monitor status - Watch the HEAT/COOL indicators and status text
-
-Valid Input Examples:
-
-20 → 20.0°C
-20.5 → 20.5°C
-20,5 → 20.5°C (European format)
-
-Invalid Input Examples:
-
-abc → "Please enter a valid number"
-50 → "Temperature must be between 10.0°C and 35.0°C"
-20.55 → "Temperature must be in 0.1°C increments"
-
+Launch the application - The thermostat window will appear  
+View current temperature - Displayed in the top panel  
+Set target temperature:  
+  
+Enter desired temperature (10°C - 35°C)  
+Click "Set Temperature"  
+System will automatically heat or cool to reach target  
+  
+Monitor status - Watch the HEAT/COOL indicators and status text  
+  
+Valid Input Examples:  
+  
+20 → 20.0°C  
+20.5 → 20.5°C  
+20,5 → 20.5°C (European format)  
+  
+Invalid Input Examples:  
+  
+abc → "Please enter a valid number"  
+50 → "Temperature must be between 10.0°C and 35.0°C"  
+20.55 → "Temperature must be in 0.1°C increments"  
+  
 ## 🔮 Future Enhancements
 
 Features:
