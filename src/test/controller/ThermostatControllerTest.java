@@ -2,6 +2,7 @@ package test.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.awt.event.ActionListener;
 import main.controller.IThermostatController;
 import main.controller.ThermostatController;
 import main.model.IThermostatModel;
@@ -78,7 +79,6 @@ public class ThermostatControllerTest {
     // 3. input should NOT be cleared (let user fix it)
     assertFalse(mockView.wasClearInputCalled());
   }
-
   @Test
   void testOutOfBoundsTemperature() {
     // set up the test scenario
@@ -110,7 +110,6 @@ public class ThermostatControllerTest {
     assertEquals(22.5, mockModel.getLastSetTargetTemperature());
     assertEquals("Target set to 22.5°C", mockView.getLastShownMessage());
   }
-
   @Test
   void testEmptyInput() {
     // set up the test scenario
@@ -122,7 +121,6 @@ public class ThermostatControllerTest {
     assertEquals("Please enter a valid number", mockView.getLastShownMessage());
     assertTrue(mockView.wasLastMessageAnError());
   }
-
   @Test
   void testWhitespaceInput() {
     // set up the test scenario
@@ -134,4 +132,150 @@ public class ThermostatControllerTest {
     assertEquals(25.0, mockModel.getLastSetTargetTemperature());
   }
 
+  // Test doubles as inner classes
+  public class MockThermostatModel implements IThermostatModel {
+
+    // Tracking variables
+    private boolean setTargetTemperatureCalled  = false;
+    private double lastSetTargetTemperature;
+
+    // Simulating validation errors when needed
+    private boolean shouldThrowException = false;
+    private String exceptionMessage = "";
+
+    @Override
+    public void setTargetTemperature(double temperature) {
+      setTargetTemperatureCalled = true;
+      lastSetTargetTemperature = temperature;
+
+      if (shouldThrowException) {
+        throw new IllegalArgumentException(exceptionMessage);
+      }
+    }
+
+    // These methods are NOT used by actionPerformed
+    // So we just return simple, predictable values
+    @Override
+    public double getCurrentTemperature() {
+      return 20.0;
+    }
+
+    @Override
+    public double getTargetTemperature() {
+      return 20.0;
+    }
+
+    @Override
+    public boolean isHeating() {
+      return false;
+    }
+
+    @Override
+    public boolean isCooling() {
+      return false;
+    }
+
+    @Override
+    public void updateSystem() {
+      // empty
+    }
+
+    @Override
+    public double getMinTemperature() {
+      return 10.0;
+    }
+
+    @Override
+    public double getMaxTemperature() {
+      return 10.0;
+    }
+
+    // TEST HELPER METHODS
+    // Let test check if method was called
+    boolean wasSetTargetTemperatureCalled() {
+      return setTargetTemperatureCalled;
+    }
+
+    // Let test check what value was passed
+    double getLastSetTargetTemperature() {
+      return lastSetTargetTemperature;
+    }
+
+    // Let test configure error behavior
+    void configureToThrowException(String message) {
+      this.shouldThrowException = true;
+      this.exceptionMessage = message;
+    }
+  }
+  public class MockThermostatView implements IThermostatView {
+
+    // What we'll return when asked
+    private String stubbedInput = "20.0";  // Default input
+    private ActionListener registeredListener;  // Store the controller
+
+    // Track what controller did to the view
+    private String lastShownMessage;
+    private boolean lastMessageWasError;
+    private boolean clearInputCalled = false;
+
+    @Override
+    public void clearInput() {
+      clearInputCalled = true;
+      stubbedInput = "";
+    }
+
+    @Override
+    public void addListener(ActionListener listener) {
+      this.registeredListener = listener;  // store the listener (controller) so we can trigger it later
+    }
+
+    @Override
+    public String getInput() {
+      return stubbedInput;
+    }
+
+    @Override
+    public void showMessage(String message, boolean isError) {
+      this.lastShownMessage = message;
+      this.lastMessageWasError = isError;
+    }
+
+    // These methods are NOT used by actionPerformed
+    @Override
+    public void updateDisplay(double currentTemp, double targetTemp, boolean isHeating,
+        boolean isCooling) {
+      // Empty - not called during button click
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+      // Empty - not called during button click
+    }
+
+    // TEST HELPER METHODS
+    // Configure what "user typed"
+    void setUserInput(String input){
+      this.stubbedInput = input;
+    }
+
+    // Simulate button click
+    void simulateButtonClick(){
+      if(registeredListener != null) {
+        registeredListener.actionPerformed(null);
+      }
+    }
+
+    // Verify what happened
+    String getLastShownMessage(){
+      return lastShownMessage;
+    }
+
+    boolean wasLastMessageAnError() {
+      return lastMessageWasError;
+    }
+
+    boolean wasClearInputCalled() {
+      return clearInputCalled;
+    }
+  }
 }
