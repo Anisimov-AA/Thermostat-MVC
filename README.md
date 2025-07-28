@@ -14,8 +14,8 @@ This project implements a smart thermostat control system that allows users to s
 
 ## 🏗️ Architecture
 
-The application follows the MVC pattern with clear separation of concerns:
-src/  
+The application follows the MVC pattern with clear separation of concerns:  
+`src/  
 ├── model/  
 │   ├── IThermostatModel.java      # Model interface  
 │   └── ThermostatModel.java       # Business logic implementation  
@@ -30,7 +30,7 @@ test/
 ├── model/  
 │   └── ThermostatModelTest.java   # Model unit tests  
 └── controller/  
-└── ThermostatControllerTest.java # Controller tests with mocks  
+└── ThermostatControllerTest.java # Controller tests with mocks`
 
 ## 🚀 Features
 
