@@ -40,6 +40,7 @@ public class ThermostatControllerTest {
     controller.run();
   }
 
+  // Happy path tests
   @Test
   void testValidTemperatureInput(){
     // set up the test scenario
@@ -59,6 +60,7 @@ public class ThermostatControllerTest {
     assertTrue(mockView.wasClearInputCalled());
   }
 
+  // Error handling tests
   @Test
   void testInvalidNumberInput() {
     // set up the test scenario
@@ -95,4 +97,41 @@ public class ThermostatControllerTest {
     // 3. input should NOT be cleared
     assertFalse(mockView.wasClearInputCalled());
   }
+
+  // Edge case tests
+  @Test
+  void testCommaDecimalSeparator() {
+    // set up the test scenario
+    mockView.setUserInput("22,5");
+    mockView.simulateButtonClick();
+
+    // check what happened
+    assertTrue(mockModel.wasSetTargetTemperatureCalled());
+    assertEquals(22.5, mockModel.getLastSetTargetTemperature());
+    assertEquals("Target set to 22.5°C", mockView.getLastShownMessage());
+  }
+
+  @Test
+  void testEmptyInput() {
+    // set up the test scenario
+    mockView.setUserInput("");
+    mockView.simulateButtonClick();
+
+    // check what happened
+    assertFalse(mockModel.wasSetTargetTemperatureCalled());
+    assertEquals("Please enter a valid number", mockView.getLastShownMessage());
+    assertTrue(mockView.wasLastMessageAnError());
+  }
+
+  @Test
+  void testWhitespaceInput() {
+    // set up the test scenario
+    mockView.setUserInput("   25.0   ");
+    mockView.simulateButtonClick();
+
+    // check what happened
+    assertTrue(mockModel.wasSetTargetTemperatureCalled());
+    assertEquals(25.0, mockModel.getLastSetTargetTemperature());
+  }
+
 }
