@@ -15,21 +15,21 @@ This project implements a smart thermostat control system that allows users to s
 <table align="center">
   <tr>
     <td align="center" style="padding: 10px;">
-      <img src="img/idle.jpg" width="350"/><br/>
+      <img src="img/idle.jpg" width="300"/><br/>
       <strong>Idle</strong>
     </td>
     <td align="center" style="padding: 10px;">
-      <img src="img/heating.jpg" width="350"/><br/>
+      <img src="img/heating.jpg" width="300"/><br/>
       <strong>Heating</strong>
     </td>
   </tr>
   <tr>
     <td align="center" style="padding: 10px;">
-      <img src="img/cooling.jpg" width="350"/><br/>
+      <img src="img/cooling.jpg" width="300"/><br/>
       <strong>Cooling</strong>
     </td>
     <td align="center" style="padding: 10px;">
-      <img src="img/error.jpg" width="350"/><br/>
+      <img src="img/error.jpg" width="300"/><br/>
       <strong>Error</strong>
     </td>
   </tr>
