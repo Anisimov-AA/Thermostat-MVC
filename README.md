@@ -10,7 +10,7 @@ This project implements a smart thermostat control system that allows users to s
 - Interface-based design
 - Comprehensive unit testing with mocks
 - Input validation and error handling
-- Internationalization support (comma/period decimal separators)
+- Best Practices: SOLID principles, clean code
 
 <table align="center">
   <tr>
