@@ -1,4 +1,4 @@
-# Smart Thermostat Control System
+# Thermostat Control System
 
 A Java Swing application demonstrating the Model-View-Controller (MVC) design pattern with comprehensive unit testing.
 
