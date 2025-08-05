@@ -37,11 +37,8 @@ This project implements a smart thermostat control system that allows users to s
 
 ## 🏗️ Architecture
 
-<div align="center">
-  <img src="img/UML.png" alt="UML" width="1000"/>
-</div>
-
 The application follows the MVC pattern with clear separation of concerns:  
+  
 src/  
 ├── model/  
 │   ├── IThermostatModel.java      # Model interface  
@@ -57,7 +54,11 @@ test/
 ├── model/  
 │   └── ThermostatModelTest.java   # Model unit tests  
 └── controller/  
-└── ThermostatControllerTest.java # Controller tests with mocks
+└── ThermostatControllerTest.java # Controller tests with mocks  
+
+<div align="center">
+  <img src="img/UML.png" alt="UML" width="1200"/>
+</div>
 
 ## 🚀 Features
 
