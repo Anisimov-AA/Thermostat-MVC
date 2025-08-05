@@ -51,7 +51,7 @@ This project implements a smart thermostat control system that allows users to s
 
 The application follows the MVC pattern with clear separation of concerns:  
 
-```
+```ASCII
 src/  
 ├── model/  
 │   ├── IThermostatModel.java      # Model interface  
