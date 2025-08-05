@@ -1,0 +1,202 @@
+@startuml
+!theme plain
+
+' Main Application Classes
+class ThermostatApp {
+    + {static} main(String[]) : void
+}
+
+' Controller Layer
+interface IThermostatController {
+    + run() : void
+}
+
+class ThermostatController {
+    - model : IThermostatModel
+    - view : IThermostatView
+    - updateTimer : Timer
+    - {static} UPDATE_INTERVAL_MS : int
+    - wasHeating : boolean
+    - wasCooling : boolean
+    + ThermostatController(IThermostatModel, IThermostatView)
+    + run() : void
+    - setupUpdateTimer() : void
+    - updateView() : void
+    + actionPerformed(ActionEvent) : void
+}
+
+' Model Layer
+interface IThermostatModel {
+    + setTargetTemperature(double) : void
+    + getCurrentTemperature() : double
+    + getTargetTemperature() : double
+    + isHeating() : boolean
+    + isCooling() : boolean
+    + updateSystem() : void
+    + getMinTemperature() : double
+    + getMaxTemperature() : double
+}
+
+class ThermostatModel {
+    - {static} MIN_TEMPERATURE : double
+    - {static} MAX_TEMPERATURE : double
+    - {static} TEMPERATURE_CHANGE_RATE : double
+    - {static} TOLERANCE : double
+    - {static} DEFAULT_TEMPERATURE : double
+    - currentTemperature : double
+    - targetTemperature : double
+    - heatingOn : boolean
+    - coolingOn : boolean
+    + ThermostatModel()
+    + setTargetTemperature(double) : void
+    + getCurrentTemperature() : double
+    + getTargetTemperature() : double
+    + isHeating() : boolean
+    + isCooling() : boolean
+    + updateSystem() : void
+    + getMinTemperature() : double
+    + getMaxTemperature() : double
+    + toString() : String
+}
+
+' View Layer
+interface IThermostatView {
+    + addListener(ActionListener) : void
+    + getInput() : String
+    + clearInput() : void
+    + showMessage(String, boolean) : void
+    + updateDisplay(double, double, boolean, boolean) : void
+    + setVisible(boolean) : void
+}
+
+class ThermostatView {
+    - {static} WINDOW_TITLE : String
+    - {static} WINDOW_WIDTH : int
+    - {static} WINDOW_HEIGHT : int
+    - {static} PADDING : int
+    - {static} DEGREE_SYMBOL : String
+    - currentTempLabel : JLabel
+    - targetTempLabel : JLabel
+    - heatingIndicator : JLabel
+    - coolingIndicator : JLabel
+    - statusLabel : JLabel
+    - tempInputField : JTextField
+    - setTempButton : JButton
+    - messageLabel : JLabel
+    - {static} MESSAGE_TIMEOUT_MS : int
+    - messageTimer : Timer
+    + ThermostatView()
+    - setupFrame() : void
+    - createComponents() : void
+    - createDisplayLabel(String, Font) : JLabel
+    - createStatusLabel(String, Font, Color, Color) : JLabel
+    - createTextField(int, Font, String) : JTextField
+    - createButton(String, Font, String) : JButton
+    - createMessageLabel(Font, Color) : JLabel
+    - layoutComponents() : void
+    - createDisplayPanel() : JPanel
+    - createStatusIndicatorPanel() : JPanel
+    - createControlPanel() : JPanel
+    - createMessagePanel() : JPanel
+    + addListener(ActionListener) : void
+    + getInput() : String
+    + clearInput() : void
+    + updateDisplay(double, double, boolean, boolean) : void
+    - updateTemperature(double, double) : void
+    - updateStatus(boolean, boolean) : void
+    - updateIndicator(JLabel, boolean, Color) : void
+    + showMessage(String, boolean) : void
+}
+
+' Style Configuration
+class StyleConfig {
+}
+
+class "StyleConfig.Fonts" as StyleConfigFonts {
+    - {static} FAMILY : String
+    + {static} TEMP_CURRENT_FONT : Font
+    + {static} TEMP_TARGET_FONT : Font
+    + {static} INDICATOR_FONT : Font
+    + {static} STATUS_FONT : Font
+    + {static} INPUT_FONT : Font
+    + {static} BUTTON_FONT : Font
+    + {static} MESSAGE_FONT : Font
+}
+
+class "StyleConfig.Colors" as StyleConfigColors {
+    + {static} INDICATOR_INACTIVE_COLOR : Color
+    + {static} INDICATOR_INACTIVE_TEXT : Color
+    + {static} INDICATOR_ACTIVE_COLOR_HEATING : Color
+    + {static} INDICATOR_ACTIVE_COLOR_COOLING : Color
+    + {static} INDICATOR_ACTIVE_TEXT : Color
+    + {static} MESSAGE_INFO_COLOR : Color
+    + {static} MESSAGE_ERROR_COLOR : Color
+}
+
+' Test Classes (simplified)
+class ThermostatControllerTest {
+    - controller : ThermostatController
+    - mockModel : MockThermostatModel
+    - mockView : MockThermostatView
+}
+
+class "ThermostatControllerTest.MockThermostatModel" as MockModel {
+    - setTargetTemperatureCalled : boolean
+    - lastSetTargetTemperature : double
+    - shouldThrowException : boolean
+    - exceptionMessage : String
+}
+
+class "ThermostatControllerTest.MockThermostatView" as MockView {
+    - stubbedInput : String
+    - registeredListener : ActionListener
+    - lastShownMessage : String
+    - lastMessageWasError : boolean
+    - clearInputCalled : boolean
+}
+
+class ThermostatModelTest {
+    - model : IThermostatModel
+}
+
+' Inheritance relationships
+IThermostatController <|.. ThermostatController
+IThermostatModel <|.. ThermostatModel
+IThermostatView <|.. ThermostatView
+JFrame <|-- ThermostatView
+ActionListener <|.. ThermostatController
+IThermostatModel <|.. MockModel
+IThermostatView <|.. MockView
+
+' Composition relationships (the missing ones!)
+ThermostatApp *-- IThermostatModel : creates
+ThermostatApp *-- IThermostatView : creates
+ThermostatApp *-- IThermostatController : creates
+ThermostatController *-- IThermostatModel : model
+ThermostatController *-- IThermostatView : view
+ThermostatController *-- Timer : updateTimer
+ThermostatView *-- JLabel : currentTempLabel
+ThermostatView *-- JLabel : targetTempLabel
+ThermostatView *-- JLabel : heatingIndicator
+ThermostatView *-- JLabel : coolingIndicator
+ThermostatView *-- JLabel : statusLabel
+ThermostatView *-- JTextField : tempInputField
+ThermostatView *-- JButton : setTempButton
+ThermostatView *-- JLabel : messageLabel
+ThermostatView *-- Timer : messageTimer
+ThermostatControllerTest *-- ThermostatController : controller
+ThermostatControllerTest *-- MockModel : mockModel
+ThermostatControllerTest *-- MockView : mockView
+ThermostatModelTest *-- IThermostatModel : model
+
+' Nested class relationships
+StyleConfig +-- StyleConfigFonts
+StyleConfig +-- StyleConfigColors
+ThermostatControllerTest +-- MockModel
+ThermostatControllerTest +-- MockView
+
+' Usage dependencies
+ThermostatView ..> StyleConfigFonts : uses
+ThermostatView ..> StyleConfigColors : uses
+
+@enduml
