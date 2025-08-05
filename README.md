@@ -70,10 +70,6 @@ test/
 └── ThermostatControllerTest.java  # Controller tests with mocks  
 ```
 
-<div align="center">
-  <img src="img/UML.png" alt="UML" width="1200"/>
-</div>
-
 ## 🛠️ Technologies
 
 - **Java 23** (JDK 23)
