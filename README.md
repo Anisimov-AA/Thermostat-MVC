@@ -35,6 +35,18 @@ This project implements a smart thermostat control system that allows users to s
   </tr>
 </table>
 
+## 🚀 Features
+
+- **Temperature Control**: Set target temperature with 0.1°C precision
+- **Automatic Climate Control**: Heating/cooling activates based on current vs target temperature
+- **Visual Indicators**: Real-time status display for heating/cooling states
+- **Input Validation**: 
+  - Temperature bounds checking (10°C - 35°C)
+  - Decimal precision validation (0.1°C increments)
+  - Number format validation
+- **Internationalization**: Accepts both comma and period as decimal separators
+- **User Feedback**: Clear success/error messages with auto-dismiss
+
 ## 🏗️ Architecture
 
 The application follows the MVC pattern with clear separation of concerns:  
@@ -59,18 +71,6 @@ test/
 <div align="center">
   <img src="img/UML.png" alt="UML" width="1200"/>
 </div>
-
-## 🚀 Features
-
-- **Temperature Control**: Set target temperature with 0.1°C precision
-- **Automatic Climate Control**: Heating/cooling activates based on current vs target temperature
-- **Visual Indicators**: Real-time status display for heating/cooling states
-- **Input Validation**: 
-  - Temperature bounds checking (10°C - 35°C)
-  - Decimal precision validation (0.1°C increments)
-  - Number format validation
-- **Internationalization**: Accepts both comma and period as decimal separators
-- **User Feedback**: Clear success/error messages with auto-dismiss
 
 ## 🛠️ Technologies
 
