@@ -38,7 +38,7 @@ This project implements a smart thermostat control system that allows users to s
 ## 🏗️ Architecture
 
 <div align="center">
-  <img src="img/UML.jpg" alt="Flickering Screen" width="1000"/>
+  <img src="img/UML.png" alt="UML" width="1000"/>
 </div>
 
 The application follows the MVC pattern with clear separation of concerns:  
