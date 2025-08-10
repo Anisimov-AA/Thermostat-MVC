@@ -6,11 +6,11 @@ A Java Swing application demonstrating the Model-View-Controller (MVC) design pa
 
 This project implements a smart thermostat control system that allows users to set target temperatures and monitor heating/cooling status. The application showcases professional software engineering practices including:
 
-- Clean MVC architecture
-- Interface-based design
-- Comprehensive unit testing with mocks
-- Input validation and error handling
-- Best Practices: SOLID principles, clean code
+- Clean **MVC architecture**
+- **Interface-based design**
+- **Input validation and error handling**
+- Comprehensive **unit testing** with **mocks**
+- Best Practices: **SOLID principles**, **clean code**
 
 <table align="center">
   <tr>
@@ -47,6 +47,30 @@ This project implements a smart thermostat control system that allows users to s
 - **Internationalization**: Accepts both comma and period as decimal separators
 - **User Feedback**: Clear success/error messages with auto-dismiss
 
+## 💡 Usage
+
+Launch the application - The thermostat window will appear  
+View current temperature - Displayed in the top panel  
+Set target temperature:  
+  
+Enter desired temperature (10°C - 35°C)  
+Click "Set Temperature"  
+System will automatically heat or cool to reach target  
+  
+Monitor status - Watch the HEAT/COOL indicators and status text  
+  
+Valid Input Examples:  
+  
+20 → 20.0°C  
+20.5 → 20.5°C  
+20,5 → 20.5°C (European format)  
+  
+Invalid Input Examples:  
+  
+abc → "Please enter a valid number"  
+50 → "Temperature must be between 10.0°C and 35.0°C"  
+20.55 → "Temperature must be in 0.1°C increments"  
+
 ## 🏗️ Architecture
 
 The application follows the MVC pattern with clear separation of concerns:  
@@ -75,30 +99,6 @@ test/
 - **Java 23** (JDK 23)
 - **Swing** - GUI framework
 - **JUnit 5** - Testing framework
-
-## 💡 Usage
-
-Launch the application - The thermostat window will appear  
-View current temperature - Displayed in the top panel  
-Set target temperature:  
-  
-Enter desired temperature (10°C - 35°C)  
-Click "Set Temperature"  
-System will automatically heat or cool to reach target  
-  
-Monitor status - Watch the HEAT/COOL indicators and status text  
-  
-Valid Input Examples:  
-  
-20 → 20.0°C  
-20.5 → 20.5°C  
-20,5 → 20.5°C (European format)  
-  
-Invalid Input Examples:  
-  
-abc → "Please enter a valid number"  
-50 → "Temperature must be between 10.0°C and 35.0°C"  
-20.55 → "Temperature must be in 0.1°C increments"  
   
 ## 🔮 Future Enhancements
 
