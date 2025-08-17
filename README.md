@@ -36,18 +36,6 @@ A Java Swing application demonstrating clean MVC architecture with comprehensive
   </tr>
 </table>
 
-## 🚀 Features
-
-- **Temperature Control**: Set target temperature with 0.1°C precision
-- **Automatic Climate Control**: Heating/cooling activates based on current vs target temperature
-- **Visual Indicators**: Real-time status display for heating/cooling states
-- **Input Validation**: 
-  - Temperature bounds checking (10°C - 35°C)
-  - Decimal precision validation (0.1°C increments)
-  - Number format validation
-- **Internationalization**: Accepts both comma and period as decimal separators
-- **User Feedback**: Clear success/error messages with auto-dismiss
-
 ## 🎮 How to Use
 Temperature Control
 
@@ -63,14 +51,15 @@ Temperature Control
 
 ## 🚀 Features
 
-- Temperature Control: Set target temperature with 0.1°C precision
-- Automatic Climate Control: Heating/cooling activates based on current vs target temperature
-- Visual Indicators: Real-time status display for heating/cooling states
-- Input Validation:
+- **Temperature Control**: Set target temperature with 0.1°C precision
+- **Automatic Climate Control**: Heating/cooling activates based on current vs target temperature
+- **Visual Indicators**: Real-time status display for heating/cooling states
+- **Input Validation**: 
   - Temperature bounds checking (10°C - 35°C)
   - Decimal precision validation (0.1°C increments)
   - Number format validation
-- Internationalization: Accepts both comma and period as decimal separators
+- **Internationalization**: Accepts both comma and period as decimal separators
+- **User Feedback**: Clear success/error messages with auto-dismiss
 
 ## 🏗️ Architecture
 
