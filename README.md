@@ -1,16 +1,17 @@
 # Thermostat Control System
 
-A Java Swing application demonstrating the Model-View-Controller (MVC) design pattern with comprehensive unit testing.
+A Java Swing application demonstrating clean MVC architecture with comprehensive unit testing and professional software engineering practices.
 
-## 📋 Overview
-
-This project implements a smart thermostat control system that allows users to set target temperatures and monitor heating/cooling status. The application showcases professional software engineering practices including:
+**Architecture & Design**
 
 - Clean **MVC architecture**
 - **Interface-based design**
 - **Input validation and error handling**
-- Comprehensive **unit testing** with **mocks**
 - Best Practices: **SOLID principles**, **clean code**
+
+**Testing Strategy**
+- Comprehensive **unit testing** (model)
+- **Mock testing** (controller)
 
 <table align="center">
   <tr>
@@ -47,35 +48,35 @@ This project implements a smart thermostat control system that allows users to s
 - **Internationalization**: Accepts both comma and period as decimal separators
 - **User Feedback**: Clear success/error messages with auto-dismiss
 
-## 💡 Usage
+## 🎮 How to Use
+Temperature Control
 
-Launch the application - The thermostat window will appear  
-View current temperature - Displayed in the top panel  
-Set target temperature:  
-  
-Enter desired temperature (10°C - 35°C)  
-Click "Set Temperature"  
-System will automatically heat or cool to reach target  
-  
-Monitor status - Watch the HEAT/COOL indicators and status text  
-  
-Valid Input Examples:  
-  
-20 → 20.0°C  
-20.5 → 20.5°C  
-20,5 → 20.5°C (European format)  
-  
-Invalid Input Examples:  
-  
-abc → "Please enter a valid number"  
-50 → "Temperature must be between 10.0°C and 35.0°C"  
-20.55 → "Temperature must be in 0.1°C increments"  
+- Launch: Run ThermostatApp.java
+- Set target: Enter temperature (10°C - 35°C) and click "Set Temperature"
+- Monitor: Watch HEAT/COOL indicators and status display
+- System automatically maintains target temperature
+
+**Input Examples**
+
+- Valid: 20, 20.5, 20,5 (European format)  
+- Invalid: abc, 50, 20.55 (not in 0.1°C increments)  
+
+## 🚀 Features
+
+- Temperature Control: Set target temperature with 0.1°C precision
+- Automatic Climate Control: Heating/cooling activates based on current vs target temperature
+- Visual Indicators: Real-time status display for heating/cooling states
+- Input Validation:
+  - Temperature bounds checking (10°C - 35°C)
+  - Decimal precision validation (0.1°C increments)
+  - Number format validation
+- Internationalization: Accepts both comma and period as decimal separators
 
 ## 🏗️ Architecture
 
 The application follows the MVC pattern with clear separation of concerns:  
 
-```
+```bash
 src/  
 ├── model/  
 │   ├── IThermostatModel.java      # Model interface  
@@ -108,7 +109,3 @@ Features:
 - Add scheduling (different temps at different times)
 - Add temperature units toggle (°C/°F)
 - Energy Usage Tracking (monitor and display energy consumption statistics)
-
-Advanced Testing:
-- Integration tests (real Model + Controller + Mock View)
-- UI tests with AssertJ Swing
